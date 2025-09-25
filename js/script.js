@@ -98,26 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Theme setup: read preference and initialize media
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    body.classList.add('theme-light');
-    if (desktopSwitch) desktopSwitch.checked = true;
-    if (mobileSwitch) mobileSwitch.checked = true;
-    setLightBackgroundOnly();
-  } else {
-    // Default dark
-    setDarkBackgroundOnly();
-  }
+  // Theme setup: always default to dark on new visit
+  body.classList.remove('theme-light');
+  if (desktopSwitch) desktopSwitch.checked = false;
+  if (mobileSwitch) mobileSwitch.checked = false;
+  setDarkBackgroundOnly();
 
   function applyTheme(isLight) {
     if (isLight) {
       body.classList.add('theme-light');
-      localStorage.setItem('theme', 'light');
       setLightThemeMedia();
     } else {
       body.classList.remove('theme-light');
-      localStorage.setItem('theme', 'dark');
       setDarkThemeMedia();
     }
   }
@@ -295,12 +287,20 @@ document.addEventListener('DOMContentLoaded', () => {
 // Form submission handling with null check
 const form = document.querySelector("form");
 if (form) {
+  const submitWrapper = document.querySelector('.btn-submit-wrapper');
+  const submitButton = submitWrapper ? submitWrapper.querySelector('button[type="submit"]') : null;
+  const tickOverlay = submitWrapper ? submitWrapper.querySelector('.tick-overlay') : null;
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.classList.add('disabled');
+    }
+
     var formData = new FormData(this);
     var phone = document.getElementById('phone');
     if (phone && phone.value.trim()) {
-      // Append phone to the message so it gets captured without a new field
       var originalMessage = formData.get('entry.1194294917') || '';
       formData.set('entry.1194294917', originalMessage + "\n\nPhone: " + phone.value.trim());
     }
@@ -309,10 +309,25 @@ if (form) {
       body: formData,
       mode: "no-cors"
     }).then(() => {
-      alert("Message sent successfully!");
-      this.reset();
+      if (tickOverlay && submitButton) {
+        tickOverlay.classList.add('show');
+        submitButton.classList.add('btn-tick');
+      }
+      setTimeout(() => {
+        if (tickOverlay) tickOverlay.classList.remove('show');
+        if (submitButton) {
+          submitButton.classList.remove('btn-tick', 'disabled');
+          submitButton.disabled = false;
+        }
+        form.reset();
+      }, 1400);
     }).catch(() => {
-      alert("Error sending message.");
+      if (submitButton) {
+        submitButton.classList.add('btn-error');
+        setTimeout(() => submitButton.classList.remove('btn-error'), 1200);
+        submitButton.disabled = false;
+        submitButton.classList.remove('disabled');
+      }
     });
   });
 }
