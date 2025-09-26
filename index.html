@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoS ync</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Caladea Font via Google Fonts (fallback: Cambria) -->
+  <style>
+    @font-face {
+      font-family: 'Caladea';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Cambria'), local('Caladea'), local('serif');
+    }
+  </style>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMSnCk5yEE5ZkOi2wvYjlKJyxz0lgyBvcQFSjhl" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body class="loading">
+
+  <!-- Splash Screen -->
+  <div class="splash-screen d-flex justify-content-center align-items-center">
+    <div class="splash-content text-center">
+      <img src="images/logo.png" alt="Company Logo" class="logo mb-3" style="width: 200px; height: auto">
+      <p class="company-title">Smart. Optimized. Solutions.</p>
+    </div>
+  </div>
+
+  <!-- Loader (covers background) -->
+  <div id="preload-loader" class="loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(18,18,18,1);justify-content:center;align-items:center;">
+    <div style="display:flex;align-items:center;justify-content:center;height:100vh;width:100vw;">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <!-- Video Background -->
+  <div class="video-wrapper">
+    <video id="bgVideo" muted playsinline class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover;"></video>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-3">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#home">
+          <img src="images/logo.png" alt="Brand Logo" class="logo me-2">
+        </a>
+        <button class="navbar-toggler d-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-none d-lg-block" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#home">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">ABOUT</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">SERVICES</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+          </ul>
+          <div class="ms-3 d-inline-block align-middle">
+            <div class="toggle" title="Toggle light/dark theme">
+              <input type="checkbox" id="themeSwitch" />
+              <label for="themeSwitch"></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Mobile Menu (visible on < lg) -->
+        <div class="custom-mobile-nav d-lg-none ms-auto">
+          <div class="nav-container">
+            <input class="checkbox" type="checkbox" id="mobileMenuToggle" />
+            <div class="hamburger-lines" aria-label="Open navigation" role="button">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+            </div>
+            <!-- Always-visible theme toggle on mobile -->
+            <div class="mobile-theme-toggle">
+              <div class="toggle" title="Toggle light/dark theme">
+                <input type="checkbox" id="themeSwitchMobile" />
+                <label for="themeSwitchMobile"></label>
+              </div>
+            </div>
+            <div class="menu-items">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#clients">Testimonials</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <div class="main-content container-fluid pt-5">
+    <div class="hero row justify-content-center align-items-center text-center py-5">
+      <div class="col-12 col-md-10 col-lg-8">
+        <h2 class="display-5 fw-bold">Empowering Growth with Smart Tech & Business Solutions</h2>
+        <p class="lead">We specialize in delivering tailored technology, automation, and business intelligence solutions that drive success for individuals and enterprises.</p>
+        <a href="#contact" class="btn btn-primary btn-lg mt-3">Let's Collaborate</a>
+      </div>
+    </div>
+
+    <h2 class="tech-stack-title text-center">Our Tech Stack</h2>
+    <div class="carousel">
+      <div class="carousel-group">
+        <div class="tech-card"><img src="mages/amazon-web-services.png" alt="Amazon Web Services"></div>
+        <div class="tech-card"><img src="mages/android-os.png" alt="Android OS"></div>
+        <div class="tech-card"><img src="mages/android-studio.png" alt="Android Studio"></div>
+        <div class="tech-card"><img src="mages/angularjs.png" alt="AngularJS"></div>
+        <div class="tech-card"><img src="mages/artificial-intelligence.png" alt="Artificial Intelligence"></div>
+        <div class="tech-card"><img src="mages/automation.png" alt="Automation"></div>
+        <div class="tech-card"><img src="mages/backend-development.png" alt="Backend Development"></div>
+        <div class="tech-card"><img src="mages/c++.png" alt="C++"></div>
+        <div class="tech-card"><img src="mages/cloud.png" alt="Cloud"></div>
+        <div class="tech-card"><img src="mages/code.png" alt="Code"></div>
+        <div class="tech-card"><img src="mages/console.png" alt="Console"></div>
+        <div class="tech-card"><img src="mages/css3.png" alt="CSS3"></div>
+        <div class="tech-card"><img src="mages/cyber-security.png" alt="Cyber Security"></div>
+        <div class="tech-card"><img src="mages/database.png" alt="Database"></div>
+        <div class="tech-card"><img src="mages/django.png" alt="Django"></div>
+        <div class="tech-card"><img src="mages/express-js.png" alt="Express JS"></div>
+        <div class="tech-card"><img src="mages/flask.png" alt="Flask"></div>
+        <div class="tech-card"><img src="mages/gitlab.png" alt="GitLab"></div>
+        <div class="tech-card"><img src="mages/html-5.png" alt="HTML5"></div>
+        <div class="tech-card"><img src="mages/html.png" alt="HTML"></div>
+        <div class="tech-card"><img src="mages/java.png" alt="Java"></div>
+        <div class="tech-card"><img src="mages/javascript-logo.png" alt="JavaScript Logo"></div>
+        <div class="tech-card"><img src="mages/javascript.png" alt="JavaScript"></div>
+        <div class="tech-card"><img src="mages/key.png" alt="Key"></div>
+        <div class="tech-card"><img src="mages/my-sql.png" alt="MySQL"></div>
+        <div class="tech-card"><img src="mages/next.js.png" alt="Next.js"></div>
+        <div class="tech-card"><img src="mages/node-js.png" alt="Node.js"></div>
+        <div class="tech-card"><img src="mages/php.png" alt="PHP"></div>
+        <div class="tech-card"><img src="mages/processor.png" alt="Processor"></div>
+        <div class="tech-card"><img src="mages/python.png" alt="Python"></div>
+        <div class="tech-card"><img src="mages/react-native.png" alt="React Native"></div>
+        <div class="tech-card"><img src="mages/rest-api.png" alt="REST API"></div>
+        <div class="tech-card"><img src="mages/server.png" alt="Server"></div>
+        <div class="tech-card"><img src="mages/shop.png" alt="Shop"></div>
+        <div class="tech-card"><img src="mages/vue-js.png" alt="Vue.js"></div>
+        <div class="tech-card"><img src="mages/web.png" alt="Web"></div>
+      </div>
+      <div aria-hidden class="carousel-group">
+        <div class="tech-card"><img src="mages/amazon-web-services.png" alt="Amazon Web Services"></div>
+        <div class="tech-card"><img src="mages/android-os.png" alt="Android OS"></div>
+        <div class="tech-card"><img src="mages/android-studio.png" alt="Android Studio"></div>
+        <div class="tech-card"><img src="mages/angularjs.png" alt="AngularJS"></div>
+        <div class="tech-card"><img src="mages/artificial-intelligence.png" alt="Artificial Intelligence"></div>
+        <div class="tech-card"><img src="mages/automation.png" alt="Automation"></div>
+        <div class="tech-card"><img src="mages/backend-development.png" alt="Backend Development"></div>
+        <div class="tech-card"><img src="mages/c++.png" alt="C++"></div>
+        <div class="tech-card"><img src="mages/cloud.png" alt="Cloud"></div>
+        <div class="tech-card"><img src="mages/code.png" alt="Code"></div>
+        <div class="tech-card"><img src="mages/console.png" alt="Console"></div>
+        <div class="tech-card"><img src="mages/css3.png" alt="CSS3"></div>
+        <div class="tech-card"><img src="mages/cyber-security.png" alt="Cyber Security"></div>
+        <div class="tech-card"><img src="mages/database.png" alt="Database"></div>
+        <div class="tech-card"><img src="mages/django.png" alt="Django"></div>
+        <div class="tech-card"><img src="mages/express-js.png" alt="Express JS"></div>
+        <div class="tech-card"><img src="mages/flask.png" alt="Flask"></div>
+        <div class="tech-card"><img src="mages/gitlab.png" alt="GitLab"></div>
+        <div class="tech-card"><img src="mages/html-5.png" alt="HTML5"></div>
+        <div class="tech-card"><img src="mages/html.png" alt="HTML"></div>
+        <div class="tech-card"><img src="mages/java.png" alt="Java"></div>
+        <div class="tech-card"><img src="mages/javascript-logo.png" alt="JavaScript Logo"></div>
+        <div class="tech-card"><img src="mages/javascript.png" alt="JavaScript"></div>
+        <div class="tech-card"><img src="mages/key.png" alt="Key"></div>
+        <div class="tech-card"><img src="mages/my-sql.png" alt="MySQL"></div>
+        <div class="tech-card"><img src="mages/next.js.png" alt="Next.js"></div>
+        <div class="tech-card"><img src="mages/node-js.png" alt="Node.js"></div>
+        <div class="tech-card"><img src="mages/php.png" alt="PHP"></div>
+        <div class="tech-card"><img src="mages/processor.png" alt="Processor"></div>
+        <div class="tech-card"><img src="mages/python.png" alt="Python"></div>
+        <div class="tech-card"><img src="mages/react-native.png" alt="React Native"></div>
+        <div class="tech-card"><img src="mages/rest-api.png" alt="REST API"></div>
+        <div class="tech-card"><img src="mages/server.png" alt="Server"></div>
+        <div class="tech-card"><img src="mages/shop.png" alt="Shop"></div>
+        <div class="tech-card"><img src="mages/vue-js.png" alt="Vue.js"></div>
+        <div class="tech-card"><img src="mages/web.png" alt="Web"></div>
+      </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section id="about" class="section container py-5">
+      <h2 class="mb-3">About SoS</h2>
+      <p>SoS is a dynamic team of engineers, developers, and business consultants offering scalable tech solutions. We help startups, professionals, and businesses automate operations, build powerful digital platforms, and unlock smarter ways to work and grow.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section container py-5">
+      <h2 class="mb-4">Our Services</h2>
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+            <h3 class="h5"><i class="fas fa-cogs me-2"></i> Business Process Automation</h3>
+            <p>We streamline repetitive and manual tasks using smart automation, freeing up your time and resources for what truly matters.</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+            <h3 class="h5"><i class="fas fa-code me-2"></i> Custom Software & Web Solutions</h3>
+            <p>From internal tools to public-facing apps, we build robust, scalable, and intuitive platforms tailored to your needs.</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+            <h3 class="h5"><i class="fas fa-database me-2"></i> Data Analytics & Dashboards</h3>
+            <p>Make informed decisions with interactive dashboards, data pipelines, and insightful visualizations designed for impact.</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+            <h3 class="h5"><i class="fas fa-cloud me-2"></i> Cloud Integration & DevOps</h3>
+            <p>Deploy faster, scale smarter, and secure your infrastructure with our end-to-end DevOps and cloud services.</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+            <h3 class="h5"><i class="fas fa-lightbulb me-2"></i> Tech Consulting & Strategy</h3>
+            <p>We guide individuals and organizations on adopting the right technologies, tools, and workflows to stay ahead.</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+            <h3 class="h5"><i class="fas fa-users me-2"></i> Startup & SME Support</h3>
+            <p>We partner with growing businesses to provide affordable tech stacks, MVP development, and go-to-market support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Work Section -->
+    <section id="work" class="section container py-5">
+      <h2 class="mb-4">Our Work</h2>
+      <div class="row gallery g-3 justify-content-center">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="gallery-card">
+            <img src="images/project1.jpg" alt="Project 1" class="gallery-item img-fluid">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="gallery-card">
+            <img src="images/project2.jpg" alt="Project 2" class="gallery-item img-fluid">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="gallery-card">
+            <img src="images/project3.jpg" alt="Project 3" class="gallery-item img-fluid">
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for expanded image -->
+      <div class="image-modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="expandedImg">
+      </div>
+      <!-- Zoom overlay for gallery card -->
+      <div id="zoom-overlay" class="zoom-overlay"></div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section container py-5">
+      <h2 class="mb-4">Our Team</h2>
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100">
+            <h3 class="h5">Sujay Nanaware</h3>
+            <p>Founder & Tech Architect</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100">
+            <h3 class="h5">Juan Peatro</h3>
+            <p>Business Development Lead</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100">
+            <h3 class="h5">Dev Shetty</h3>
+            <p>UI/UX & Product Designer</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100">
+            <h3 class="h5">Schneider D'souza</h3>
+            <p>Automation & Data Specialist</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="clients" class="section container py-5">
+      <h2 class="mb-4">What Our Clients Say</h2>
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="testimonial card h-100">
+            <p>"SoS built a custom internal tool that helped us cut down 30% of our manual tasks. Their team is brilliant, responsive, and professional."</p>
+            <p class="client-name">- Neha Verma, COO at BrightPath </p>
+          </div>
+        </div>
+      
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="testimonial card h-100">
+            <p>"We were struggling with data management until SoS created a dashboard that transformed the way we make business decisions."</p>
+            <p class="client-name">- Raj Patel, Founder at StartTech </p>
+          </div>
+        </div>
+      
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="testimonial card h-100">
+            <p>"Working with SoS was a game-changer. Their custom solutions increased our productivity by 40%!"</p>
+            <p class="client-name">- Ananya Singh, CTO at FinEdge </p>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section container py-5">
+      <h2 class="mb-3 text-center">Let's Build Something Great</h2>
+      <p class="text-center">Ready to take your business to the next level? Tell us what you're working on, and we'll show you how we can help.</p>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <form action="https://docs.google.com/forms/d/e/1FAIpQLSe5wWFU8nPazUEl2dnTYwbc_A7DkW841ujeSrIVbXLEMWWVcw/formResponse" method="POST" target="_blank" class="g-3">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <input type="text" name="entry.2054266878" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-12 col-md-6">
+                <input type="tel" name="entry.1251248798" class="form-control" placeholder="Your Phone" pattern="^[0-9+()\-\s]{7,20}$" title="Enter a valid phone number (7-20 digits, may include +, (), -)">
+              </div>
+              <div class="col-12">
+                <input type="email" name="entry.1197953413" class="form-control" placeholder="Your Email" required>
+              </div>
+              
+              <div class="col-12">
+                <textarea name="entry.893908689" class="form-control" placeholder="Your Message" rows="4" required></textarea>
+              </div>
+              <div class="col-12 text-center">
+                <div class="btn-submit-wrapper">
+                  <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
+                  <div class="tick-overlay" aria-hidden="true">
+                    <div class="tick-circle tick-pop">
+                      <div class="tick-mark"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<!-- Footer Start -->
+<footer style="background-color: rgba(248, 249, 250, 0); padding: 2rem 1rem; text-align: center; font-family: Arial, sans-serif; font-size: 0.9rem; color: #db80f2;">
+  <div style="margin-bottom: 0.5rem;">
+    &copy; 2025 SOSync. All rights reserved.
+  </div>
+  <div>
+    <a href="#contact" style="margin: 0 0.5rem; color: #db80f2; text-decoration: none;">Privacy Policy</a> |
+    <a href="#contact" style="margin: 0 0.5rem; color: #db80f2; text-decoration: none;">Terms of Service</a> |
+    <a href="mailto:contact@sosync.site" style="margin: 0 0.5rem; color: #db80f2; text-decoration: none;">Contact</a>
+
+  </div>
+</footer>
+<!-- Footer End -->
+
+</html>
