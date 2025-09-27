@@ -305,84 +305,87 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Image Gallery Modal (Original logic cleanup)
-  const modal = document.querySelector('.image-modal');
-  const modalImg = document.getElementById('expandedImg');
-  const closeBtn = document.querySelector('.close-modal');
-  const galleryCards = document.querySelectorAll('.gallery-card');
-
-  function closeModal() {
-      if (modal) modal.classList.remove('active');
-      document.body.style.overflow = ''; 
-      document.removeEventListener('keydown', escCloseModal);
-  }
-  function escCloseModal(e) {
-      if (e.key === 'Escape') closeModal();
-  }
-
-  galleryCards.forEach(card => {
-      card.addEventListener('click', function() {
-          const img = this.querySelector('.gallery-item');
-          if (modal) modal.classList.add('active');
-          if (modalImg) modalImg.src = img.src;
-          document.body.style.overflow = 'hidden'; 
-          document.addEventListener('keydown', escCloseModal, { once: true });
-      });
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (modal) {
-      modal.addEventListener('click', function(e) {
-          if (e.target === modal) closeModal();
-      });
-  }
-
-  // --- Gallery Card Zoom Feature (Replaces old modal logic) ---
-  const zoomOverlay = document.getElementById('zoom-overlay');
-  function closeZoom() {
-      if (zoomOverlay) zoomOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', escZoom);
-  }
-  function escZoom(e) {
-      if (e.key === 'Escape') closeZoom();
-  }
-  
-  document.querySelectorAll('.gallery-card').forEach(card => {
-      card.addEventListener('click', function(e) {
-          e.stopPropagation(); // Stop propagation for the old modal
-          const img = card.querySelector('img');
-          if (!img || !zoomOverlay) return;
-          
-          // Build zoomed card
-          zoomOverlay.innerHTML = '';
-          const zoomedCard = document.createElement('div');
-          zoomedCard.className = 'zoomed-card';
-          const zoomedImg = document.createElement('img');
-          zoomedImg.src = img.src;
-          zoomedImg.alt = img.alt || '';
-          zoomedCard.appendChild(zoomedImg);
-          
-          // Add close button
-          const closeBtn = document.createElement('button');
-          closeBtn.className = 'zoom-close';
-          closeBtn.innerHTML = '&times;';
-          closeBtn.onclick = closeZoom;
-          zoomedCard.appendChild(closeBtn);
-          
-          zoomOverlay.appendChild(zoomedCard);
-          zoomOverlay.classList.add('active');
-          document.body.style.overflow = 'hidden';
-          
-          // Close on overlay click (not on card)
-          zoomOverlay.onclick = function(ev) {
-              if (ev.target === zoomOverlay) closeZoom();
-          };
-          // Close on ESC
-          document.addEventListener('keydown', escZoom, { once: true });
-      });
-  });
-});
+   // Image Gallery Modal
+     document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.querySelector('.image-modal');
+        const modalImg = document.getElementById('expandedImg');
+        const closeBtn = document.querySelector('.close-modal');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+    
+        galleryCards.forEach(card => {
+          card.addEventListener('click', function() {
+            const img = this.querySelector('.gallery-item');
+            modal.classList.add('active');
+            modalImg.src = img.src;
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+          });
+        });
+    
+        // Close modal when clicking the close button
+        closeBtn.addEventListener('click', closeModal);
+    
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+    
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
+        });
+    
+        function closeModal() {
+          modal.classList.remove('active');
+          document.body.style.overflow = ''; // Restore scrolling
+        }
+      });
+    
+      // --- Gallery Card Zoom Feature ---
+      const zoomOverlay = document.getElementById('zoom-overlay');
+      document.querySelectorAll('.gallery-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          // Prevent triggering the old modal
+          e.stopPropagation();
+          const img = card.querySelector('img');
+          if (!img || !zoomOverlay) return;
+          // Build zoomed card
+          zoomOverlay.innerHTML = '';
+          const zoomedCard = document.createElement('div');
+          zoomedCard.className = 'zoomed-card';
+          const zoomedImg = document.createElement('img');
+          zoomedImg.src = img.src;
+          zoomedImg.alt = img.alt || '';
+          zoomedCard.appendChild(zoomedImg);
+          // Add close button
+          const closeBtn = document.createElement('button');
+          closeBtn.className = 'zoom-close';
+          closeBtn.innerHTML = '&times;';
+          closeBtn.onclick = closeZoom;
+          zoomedCard.appendChild(closeBtn);
+          zoomOverlay.appendChild(zoomedCard);
+          zoomOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          // Close on overlay click (not on card)
+          zoomOverlay.onclick = function(ev) {
+            if (ev.target === zoomOverlay) closeZoom();
+          };
+          // Close on ESC
+          document.addEventListener('keydown', escZoom, { once: true });
+        });
+      });
+      function closeZoom() {
+        if (zoomOverlay) zoomOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      function escZoom(e) {
+        if (e.key === 'Escape') closeZoom();
+      }
+    });
+    
 
 // --- Form submission handling with null check (Outside DOMContentLoaded) ---
 const form = document.querySelector("form");
